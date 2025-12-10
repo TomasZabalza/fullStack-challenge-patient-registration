@@ -1,0 +1,82 @@
+{
+  "info": {
+    "name": "Patient Registration Backend",
+    "_postman_id": "00000000-0000-4000-8000-000000000000",
+    "description": "Collection for health, patient listing, and patient creation endpoints.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["health"]
+        }
+      }
+    },
+    {
+      "name": "List Patients",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/patients",
+          "host": ["{{baseUrl}}"],
+          "path": ["patients"]
+        }
+      }
+    },
+    {
+      "name": "Create Patient",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "fullName",
+              "value": "Jane Doe",
+              "type": "text"
+            },
+            {
+              "key": "email",
+              "value": "jane.doe@gmail.com",
+              "type": "text"
+            },
+            {
+              "key": "phoneCountryCode",
+              "value": "+1",
+              "type": "text"
+            },
+            {
+              "key": "phoneNumber",
+              "value": "5551234567",
+              "type": "text"
+            },
+            {
+              "key": "documentPhoto",
+              "type": "file",
+              "src": ""
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/patients",
+          "host": ["{{baseUrl}}"],
+          "path": ["patients"]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:4000"
+    }
+  ]
+}

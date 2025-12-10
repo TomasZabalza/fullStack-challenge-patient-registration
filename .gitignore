@@ -26,6 +26,9 @@ __screenshots__/
 .env.*.local
 .env.*
 
+# Uploaded documents (backend)
+backend/uploads/
+
 # IDE/editor artifacts
 .idea/
 .project
