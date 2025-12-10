@@ -6,7 +6,7 @@ const BATCH_SIZE = 10;
 const POLL_INTERVAL_MS = 5000;
 
 let isProcessing = false;
-let intervalHandle: NodeJS.Timeout | undefined;
+let intervalHandle: ReturnType<typeof setInterval> | undefined;
 
 const processOutbox = async () => {
   if (isProcessing) {
@@ -57,7 +57,9 @@ const processOutbox = async () => {
 
 export const startOutboxWorker = () => {
   if (!intervalHandle) {
-    intervalHandle = setInterval(processOutbox, POLL_INTERVAL_MS);
+    intervalHandle = setInterval(() => {
+      void processOutbox();
+    }, POLL_INTERVAL_MS);
   }
   void processOutbox();
 
