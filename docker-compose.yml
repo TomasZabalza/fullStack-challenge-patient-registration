@@ -26,5 +26,14 @@ services:
       - ./backend/uploads:/app/uploads
     command: sh -c "npm run db:deploy && npm run start"
 
+  frontend:
+    build:
+      context: ./frontend/patient-registration
+      dockerfile: Dockerfile
+    ports:
+      - "4200:4200"
+    depends_on:
+      - backend
+
 volumes:
   pgdata:
