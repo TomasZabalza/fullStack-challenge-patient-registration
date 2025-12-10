@@ -4,7 +4,11 @@ import express, { Request, Response } from "express";
 import multer, { MulterError } from "multer";
 import { body, validationResult } from "express-validator";
 import prisma from "../lib/prisma";
-import { Patient, Prisma } from "../generated/prisma/client";
+import {
+  OutboxChannel,
+  Patient,
+  Prisma,
+} from "../generated/prisma/client";
 
 const router = express.Router();
 
@@ -155,10 +159,11 @@ router.post(
           },
         });
 
-        await tx.emailOutbox.create({
+        await tx.outbox.create({
           data: {
             patientId: created.id,
-            toEmail: created.email,
+            channel: OutboxChannel.EMAIL,
+            to: created.email,
             subject: confirmationSubject,
             body: confirmationBody,
           },

@@ -22,25 +22,31 @@ model Patient {
   documentPhotoPath String
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
-  emailOutbox       EmailOutbox[]
+  outbox            Outbox[]
 }
 
-model EmailOutbox {
-  id         String   @id @default(uuid())
-  patientId  String
-  toEmail    String
-  subject    String
-  body       String
-  status     EmailStatus @default(PENDING)
-  error      String?
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  sentAt     DateTime?
+model Outbox {
+  id        String      @id @default(uuid())
+  patientId String
+  channel   OutboxChannel
+  to        String
+  subject   String?
+  body      String
+  status    OutboxStatus @default(PENDING)
+  error     String?
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  sentAt    DateTime?
 
   patient Patient @relation(fields: [patientId], references: [id], onDelete: Cascade)
 }
 
-enum EmailStatus {
+enum OutboxChannel {
+  EMAIL
+  SMS
+}
+
+enum OutboxStatus {
   PENDING
   SENT
   FAILED
