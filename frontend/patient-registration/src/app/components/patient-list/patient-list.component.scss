@@ -1,0 +1,71 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  margin-top: 1rem;
+}
+
+.banner--error {
+  background: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecdd3;
+}
+
+.banner button {
+  background: transparent;
+  border: 1px solid #991b1b;
+  color: #991b1b;
+  border-radius: 10px;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+}
+
+.empty {
+  margin-top: 1rem;
+  text-align: center;
+  color: #475569;
+}
+
+.card--ghost {
+  background: #f1f5f9;
+  border: 1px dashed #e2e8f0;
+  min-height: 140px;
+  border-radius: 14px;
+  padding: 1rem;
+}
+
+.ghost-line {
+  height: 12px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #e2e8f0 0%, #f8fafc 50%, #e2e8f0 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  margin-bottom: 10px;
+}
+
+.ghost-line--wide {
+  width: 70%;
+}
+
+.ghost-line--mid {
+  width: 50%;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

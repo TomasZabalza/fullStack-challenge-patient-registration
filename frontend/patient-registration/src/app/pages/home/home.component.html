@@ -1,0 +1,61 @@
+<div class="page">
+  <header class="hero">
+    <div class="hero__copy">
+      <p class="eyebrow">Patient onboarding</p>
+      <h1>Register patients smoothly and keep their documents close.</h1>
+      <p class="lede">
+        Upload ID photos, validate Gmail-only emails and structured phone numbers, and confirm with
+        asynchronous messaging. Built for fast follow-ups and ready for upcoming SMS notifications.
+      </p>
+      <button class="primary" type="button" (click)="openForm()">Add patient</button>
+    </div>
+    <div class="hero__card">
+      <div class="hero__badge">Drag & drop JPGs</div>
+      <div class="hero__illustration">
+        <div class="pulse"></div>
+        <div class="pulse pulse--2"></div>
+        <div class="card-glow"></div>
+        <div class="doc-thumb">
+          <div class="strip"></div>
+          <div class="strip strip--small"></div>
+          <div class="photo-chip"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="board">
+    <div class="board__header">
+      <div>
+        <p class="eyebrow">Patients</p>
+        <h2>Recent registrations</h2>
+      </div>
+      <button class="ghost" type="button" (click)="openForm()">Add patient</button>
+    </div>
+
+    <app-patient-list
+      [patients]="patients()"
+      [loading]="loading()"
+      [error]="listError()"
+      [expandedId]="expandedId()"
+      (listRetry)="loadPatients()"
+      (cardToggle)="toggleExpand($event)"
+    />
+  </section>
+</div>
+
+<app-patient-form-modal
+  [visible]="formVisible()"
+  [form]="form"
+  [submitting]="submitting()"
+  [submitted]="submitted()"
+  [statusState]="statusState()"
+  [statusMessage]="statusMessage()"
+  [isDragging]="isDragging()"
+  (closed)="closeForm()"
+  (formSubmit)="submit()"
+  (fileSelect)="handleFileInput($event)"
+  (dragOverEvent)="onDragOver($event)"
+  (dragLeaveEvent)="onDragLeave($event)"
+  (fileDrop)="onFileDrop($event)"
+/>

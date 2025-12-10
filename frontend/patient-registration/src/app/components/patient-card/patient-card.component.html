@@ -1,0 +1,32 @@
+<article
+  class="card"
+  [class.card--expanded]="expanded"
+  (click)="onToggle()"
+>
+  <div class="card__header">
+    <div>
+      <p class="eyebrow">Full name</p>
+      <h3>{{ patient.fullName }}</h3>
+      <p class="meta">{{ patient.email }}</p>
+    </div>
+    <img
+      class="photo"
+      [src]="patient.documentPhotoUrl"
+      [alt]="patient.fullName + ' document photo'"
+    />
+  </div>
+  <div class="card__details" *ngIf="expanded">
+    <div class="row">
+      <span class="label">Phone</span>
+      <span class="value">{{ patient.phone.countryCode }} {{ patient.phone.number }}</span>
+    </div>
+    <div class="row">
+      <span class="label">Registered</span>
+      <span class="value">{{ patient.createdAt | date: 'medium' }}</span>
+    </div>
+    <div class="row">
+      <span class="label">Updated</span>
+      <span class="value">{{ patient.updatedAt | date: 'medium' }}</span>
+    </div>
+  </div>
+</article>

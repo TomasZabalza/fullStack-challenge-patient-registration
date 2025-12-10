@@ -1,0 +1,83 @@
+<div class="modal-backdrop" *ngIf="visible">
+  <div class="modal">
+    <div class="modal__header">
+      <div>
+        <p class="eyebrow">Add patient</p>
+        <h3>Enter the patient details</h3>
+      </div>
+      <button class="icon-btn" type="button" (click)="closed.emit()">×</button>
+    </div>
+
+    <form class="modal__body" [formGroup]="form" (ngSubmit)="formSubmit.emit()">
+      <div class="field">
+        <label>Full name</label>
+        <input type="text" placeholder="Jane Doe" formControlName="fullName" />
+        <div class="error" *ngIf="form.get('fullName')?.invalid && (form.get('fullName')?.touched || submitted)">
+          Name is required and must contain letters and spaces only.
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Email (Gmail only)</label>
+        <input type="email" placeholder="jane.doe@gmail.com" formControlName="email" />
+        <div class="error" *ngIf="form.get('email')?.invalid && (form.get('email')?.touched || submitted)">
+          Enter a valid @gmail.com address.
+        </div>
+      </div>
+
+      <div class="field phone">
+        <div>
+          <label>Country code</label>
+          <input type="text" placeholder="+1" formControlName="phoneCountryCode" />
+          <div
+            class="error"
+            *ngIf="form.get('phoneCountryCode')?.invalid && (form.get('phoneCountryCode')?.touched || submitted)"
+          >
+            Use + followed by 1-4 digits.
+          </div>
+        </div>
+        <div>
+          <label>Phone number</label>
+          <input type="tel" placeholder="5551234567" formControlName="phoneNumber" />
+          <div
+            class="error"
+            *ngIf="form.get('phoneNumber')?.invalid && (form.get('phoneNumber')?.touched || submitted)"
+          >
+            6 to 15 digits required.
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="dropzone"
+        [class.dropzone--dragging]="isDragging"
+        (drop)="fileDrop.emit($event)"
+        (dragover)="dragOverEvent.emit($event)"
+        (dragleave)="dragLeaveEvent.emit($event)"
+      >
+        <input type="file" accept=".jpg,image/jpeg" (change)="onFileChange($event)" />
+        <div>
+          <p>Drag & drop a .jpg document photo, or click to browse.</p>
+          <small>JPEG only, under 5MB.</small>
+        </div>
+      </div>
+      <div class="error" *ngIf="form.get('documentPhoto')?.invalid && (form.get('documentPhoto')?.touched || submitted)">
+        A JPEG document photo is required.
+      </div>
+
+      <div class="status" *ngIf="statusState !== 'idle'">
+        <div [class.success]="statusState === 'success'" [class.error]="statusState === 'error'">
+          {{ statusMessage }}
+        </div>
+      </div>
+
+      <div class="modal__footer">
+        <button type="button" class="ghost" (click)="closed.emit()">Cancel</button>
+        <button type="submit" class="primary" [disabled]="submitting">
+          <span *ngIf="!submitting">Submit</span>
+          <span *ngIf="submitting" class="spinner"></span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

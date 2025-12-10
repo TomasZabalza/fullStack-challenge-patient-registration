@@ -1,0 +1,24 @@
+<div *ngIf="error" class="banner banner--error">
+  <span>{{ error }}</span>
+  <button type="button" (click)="listRetry.emit()">Retry</button>
+</div>
+
+<div *ngIf="loading" class="grid">
+  <div class="card card--ghost" *ngFor="let i of [1, 2, 3, 4]">
+    <div class="ghost-line ghost-line--wide"></div>
+    <div class="ghost-line ghost-line--mid"></div>
+  </div>
+</div>
+
+<div *ngIf="!loading && patients.length === 0" class="empty">
+  <p>No patients yet. Start by adding one with the button above.</p>
+</div>
+
+<div *ngIf="!loading && patients.length > 0" class="grid">
+  <app-patient-card
+    *ngFor="let patient of patients; trackBy: trackById"
+    [patient]="patient"
+    [expanded]="expandedId === patient.id"
+    (cardToggle)="cardToggle.emit($event)"
+  />
+</div>
