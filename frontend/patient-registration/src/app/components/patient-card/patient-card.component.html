@@ -3,7 +3,7 @@
   [class.card--expanded]="expanded"
   (click)="onToggle()"
 >
-  <div class="card__header">
+  <div class="card-header">
     <div>
       <p class="eyebrow">Full name</p>
       <h3>{{ patient.fullName }}</h3>
@@ -15,7 +15,7 @@
       [alt]="patient.fullName + ' document photo'"
     />
   </div>
-  <div class="card__details" *ngIf="expanded">
+  <div class="card-details" *ngIf="expanded">
     <div class="row">
       <span class="label">Phone</span>
       <span class="value">{{ patient.phone.countryCode }} {{ patient.phone.number }}</span>

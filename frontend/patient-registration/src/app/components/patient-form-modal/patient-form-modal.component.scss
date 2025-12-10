@@ -24,17 +24,17 @@
   animation: pop 0.22s ease;
 }
 
-.modal__header {
+.modal-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.modal__header h3 {
+.modal-header h3 {
   margin: 0.1rem 0 0;
 }
 
-.modal__body {
+.modal-body {
   display: flex;
   flex-direction: column;
   gap: 0.9rem;

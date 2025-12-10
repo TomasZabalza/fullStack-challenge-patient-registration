@@ -1,6 +1,6 @@
 <div class="page">
   <header class="hero">
-    <div class="hero__copy">
+    <div class="hero-copy">
       <p class="eyebrow">Patient onboarding</p>
       <h1>Register patients smoothly and keep their documents close.</h1>
       <p class="lede">
@@ -9,15 +9,15 @@
       </p>
       <button class="primary" type="button" (click)="openForm()">Add patient</button>
     </div>
-    <div class="hero__card">
-      <div class="hero__badge">Drag & drop JPGs</div>
-      <div class="hero__illustration">
+    <div class="hero-card">
+      <div class="hero-badge">Drag & drop JPGs</div>
+      <div class="hero-illustration">
         <div class="pulse"></div>
-        <div class="pulse pulse--2"></div>
+        <div class="pulse pulse-2"></div>
         <div class="card-glow"></div>
         <div class="doc-thumb">
           <div class="strip"></div>
-          <div class="strip strip--small"></div>
+          <div class="strip strip-small"></div>
           <div class="photo-chip"></div>
         </div>
       </div>
@@ -25,7 +25,7 @@
   </header>
 
   <section class="board">
-    <div class="board__header">
+    <div class="board-header">
       <div>
         <p class="eyebrow">Patients</p>
         <h2>Recent registrations</h2>
@@ -34,12 +34,16 @@
     </div>
 
     <app-patient-list
-      [patients]="patients()"
+      [patients]="displayedPatients()"
       [loading]="loading()"
       [error]="listError()"
       [expandedId]="expandedId()"
+      [page]="page()"
+      [hasMore]="hasMore()"
       (listRetry)="loadPatients()"
       (cardToggle)="toggleExpand($event)"
+      (nextPage)="goNextPage()"
+      (prevPage)="goPrevPage()"
     />
   </section>
 </div>

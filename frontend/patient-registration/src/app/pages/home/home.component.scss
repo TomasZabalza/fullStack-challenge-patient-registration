@@ -30,20 +30,20 @@
   padding: 1rem;
 }
 
-.hero__copy h1 {
+.hero-copy h1 {
   margin: 0 0 0.75rem;
   font-size: clamp(1.9rem, 3vw, 2.8rem);
   line-height: 1.1;
 }
 
-.hero__copy .lede {
+.hero-copy .lede {
   margin: 0 0 1.25rem;
   color: #334155;
   font-size: 1rem;
   max-width: 48ch;
 }
 
-.hero__card {
+.hero-card {
   position: relative;
   background: linear-gradient(145deg, #0ea5e9 0%, #818cf8 100%);
   color: white;
@@ -54,7 +54,7 @@
   box-shadow: 0 30px 70px rgba(99, 102, 241, 0.35);
 }
 
-.hero__badge {
+.hero-badge {
   display: inline-block;
   background: rgba(255, 255, 255, 0.15);
   padding: 0.45rem 0.8rem;
@@ -63,7 +63,7 @@
   font-size: 0.85rem;
 }
 
-.hero__illustration {
+.hero-illustration {
   position: absolute;
   inset: 0;
   display: grid;
@@ -71,7 +71,7 @@
 }
 
 .pulse,
-.pulse--2 {
+.pulse-2 {
   position: absolute;
   width: 120px;
   height: 120px;
@@ -80,7 +80,7 @@
   animation: pulse 3s ease-in-out infinite;
 }
 
-.pulse--2 {
+.pulse-2 {
   width: 160px;
   height: 160px;
   animation-delay: 0.6s;
@@ -115,7 +115,7 @@
   border-radius: 999px;
 }
 
-.strip--small {
+.strip-small {
   width: 50%;
   background: #e2e8f0;
 }
@@ -137,14 +137,14 @@
   border: 1px solid #e2e8f0;
 }
 
-.board__header {
+.board-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
 }
 
-.board__header h2 {
+.board-header h2 {
   margin: 0.1rem 0 0;
 }
 
@@ -200,7 +200,7 @@
   .hero {
     grid-template-columns: 1fr;
   }
-  .board__header {
+  .board-header {
     flex-direction: column;
     align-items: flex-start;
   }

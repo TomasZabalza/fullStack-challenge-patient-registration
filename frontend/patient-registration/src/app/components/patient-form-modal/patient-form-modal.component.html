@@ -1,6 +1,6 @@
 <div class="modal-backdrop" *ngIf="visible">
   <div class="modal">
-    <div class="modal__header">
+    <div class="modal-header">
       <div>
         <p class="eyebrow">Add patient</p>
         <h3>Enter the patient details</h3>
@@ -8,7 +8,7 @@
       <button class="icon-btn" type="button" (click)="closed.emit()">×</button>
     </div>
 
-    <form class="modal__body" [formGroup]="form" (ngSubmit)="formSubmit.emit()">
+    <form class="modal-body" [formGroup]="form" (ngSubmit)="formSubmit.emit()">
       <div class="field">
         <label>Full name</label>
         <input type="text" placeholder="Jane Doe" formControlName="fullName" />
@@ -71,7 +71,7 @@
         </div>
       </div>
 
-      <div class="modal__footer">
+      <div class="modal-footer">
         <button type="button" class="ghost" (click)="closed.emit()">Cancel</button>
         <button type="submit" class="primary" [disabled]="submitting">
           <span *ngIf="!submitting">Submit</span>

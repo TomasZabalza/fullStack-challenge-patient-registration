@@ -9,7 +9,9 @@ export class PatientService {
   private readonly http = inject(HttpClient);
 
   listPatients(): Observable<Patient[]> {
-    return this.http.get<PatientResponse>(`${environment.apiBase}/patients`).pipe(map((res) => res.data));
+    return this.http
+      .get<PatientResponse>(`${environment.apiBase}/patients`)
+      .pipe(map((res) => res.data.map((p) => this.withAbsolutePhoto(p))));
   }
 
   createPatient(payload: {
@@ -26,6 +28,16 @@ export class PatientService {
     form.append('phoneNumber', payload.phoneNumber);
     form.append('documentPhoto', payload.documentPhoto);
 
-    return this.http.post<{ data: Patient }>(`${environment.apiBase}/patients`, form).pipe(map((res) => res.data));
+    return this.http
+      .post<{ data: Patient }>(`${environment.apiBase}/patients`, form)
+      .pipe(map((res) => this.withAbsolutePhoto(res.data)));
+  }
+
+  private withAbsolutePhoto(patient: Patient): Patient {
+    const isAbsolute = /^https?:\/\//i.test(patient.documentPhotoUrl);
+    const photoUrl = isAbsolute
+      ? patient.documentPhotoUrl
+      : `${environment.apiBase}${patient.documentPhotoUrl.startsWith('/') ? '' : '/'}${patient.documentPhotoUrl}`;
+    return { ...patient, documentPhotoUrl: photoUrl };
   }
 }

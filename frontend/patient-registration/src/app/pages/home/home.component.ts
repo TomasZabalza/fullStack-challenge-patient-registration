@@ -19,6 +19,14 @@ export class HomeComponent implements OnInit {
   private readonly patientService = inject(PatientService);
 
   patients = signal<Patient[]>([]);
+  page = signal<number>(1);
+  pageSize = 9;
+  hasMore = signal<boolean>(false);
+  displayedPatients = computed(() => {
+    const start = (this.page() - 1) * this.pageSize;
+    const end = start + this.pageSize;
+    return this.patients().slice(start, end);
+  });
   loading = signal<boolean>(true);
   listError = signal<string | null>(null);
 
@@ -67,6 +75,7 @@ export class HomeComponent implements OnInit {
     this.patientService.listPatients().subscribe({
       next: (data) => {
         this.patients.set(data);
+        this.hasMore.set(this.patients().length > this.pageSize * this.page());
         this.loading.set(false);
       },
       error: () => {
@@ -74,6 +83,20 @@ export class HomeComponent implements OnInit {
         this.loading.set(false);
       },
     });
+  }
+
+  goNextPage(): void {
+    if (this.hasMore()) {
+      this.page.update((p) => p + 1);
+      this.loadPatients();
+    }
+  }
+
+  goPrevPage(): void {
+    if (this.page() > 1) {
+      this.page.update((p) => Math.max(1, p - 1));
+      this.loadPatients();
+    }
   }
 
   toggleExpand(id: string): void {

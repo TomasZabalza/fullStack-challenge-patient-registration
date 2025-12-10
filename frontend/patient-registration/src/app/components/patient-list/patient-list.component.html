@@ -1,12 +1,12 @@
-<div *ngIf="error" class="banner banner--error">
+<div *ngIf="error" class="banner banner-error">
   <span>{{ error }}</span>
   <button type="button" (click)="listRetry.emit()">Retry</button>
 </div>
 
 <div *ngIf="loading" class="grid">
-  <div class="card card--ghost" *ngFor="let i of [1, 2, 3, 4]">
-    <div class="ghost-line ghost-line--wide"></div>
-    <div class="ghost-line ghost-line--mid"></div>
+  <div class="card card-ghost" *ngFor="let i of [1, 2, 3]">
+    <div class="ghost-line ghost-line-wide"></div>
+    <div class="ghost-line ghost-line-mid"></div>
   </div>
 </div>
 
@@ -21,4 +21,10 @@
     [expanded]="expandedId === patient.id"
     (cardToggle)="cardToggle.emit($event)"
   />
+</div>
+
+<div class="pager" *ngIf="!loading && (patients.length > 0 || page > 1)">
+  <button class="ghost" type="button" [disabled]="page === 1" (click)="prevPage.emit()">Previous</button>
+  <span class="page-indicator">Page {{ page }}</span>
+  <button class="ghost" type="button" [disabled]="!hasMore" (click)="nextPage.emit()">Next</button>
 </div>

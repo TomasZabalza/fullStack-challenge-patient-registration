@@ -15,9 +15,13 @@ export class PatientListComponent {
   @Input() loading = false;
   @Input() error: string | null = null;
   @Input() expandedId: string | null = null;
+  @Input() page = 1;
+  @Input() hasMore = false;
 
   @Output() listRetry = new EventEmitter<void>();
   @Output() cardToggle = new EventEmitter<string>();
+  @Output() nextPage = new EventEmitter<void>();
+  @Output() prevPage = new EventEmitter<void>();
 
   trackById(_index: number, item: Patient): string {
     return item.id;
