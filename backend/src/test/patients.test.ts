@@ -75,3 +75,4 @@ describe("patients routes", () => {
     expect(prismaMock.$transaction).toHaveBeenCalled();
   });
 });
+
